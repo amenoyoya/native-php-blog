@@ -1,7 +1,7 @@
-// 記事登録ボタンの実装
-$('#add-article').click(function(){
-    var title = $('#blog-title').val(), body = $('#blog-body').val();
-
+// 記事更新ボタンの実装
+$('#update-article').click(function(){
+    var id = $('#blog-id').val(), title = $('#blog-title').val(), body = $('#blog-body').val();
+    alert(body);
     $('#result').html(''); // 結果欄をクリアしておく
     // 入力チェック
     if(title === ''){
@@ -12,8 +12,8 @@ $('#add-article').click(function(){
         $('#result').html('<div class="alert alert-warning">ブログのタイトルが長すぎます</div>');
     }
     // データベース処理実行
-    ajaxDBctl('./add.php', 'POST', {
-        'blog-title': title, 'blog-body': body
+    ajaxDBctl('./update.php', 'POST', {
+        'blog-id': id, 'blog-title': title, 'blog-body': body
     }, function(data){
         if(!data['ok']){ // PHP側でエラーが起こった際はアラート実行
             alert(data['message']);
