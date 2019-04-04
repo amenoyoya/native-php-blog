@@ -9,6 +9,9 @@ if(!isset($_POST['blog-title']) || !isset($_POST['blog-body'])){
         'message' => '無効なパラメータが指定されています',
     )));
 }
+// HTMLエスケープ
+$title = htmlspecialchars($_POST['blog-title']);
+$body = htmlspecialchars($_POST['blog-body']);
 
 // PDOでMySQLデータベースに接続
 try{
@@ -24,8 +27,8 @@ try{
 
 // blogデータベース/articlesテーブルに記事登録
 $state = $pdo->prepare('insert into articles (title, body) values (?, ?)');
-if(!$state->bindValue(1, $_POST['blog-title'], PDO::PARAM_STR)
-    || !$state->bindValue(2, $_POST['blog-body'], PDO::PARAM_STR)
+if(!$state->bindValue(1, $title, PDO::PARAM_STR)
+    || !$state->bindValue(2, $body, PDO::PARAM_STR)
     || !$state->execute())
 {
     die(json_encode(array(
@@ -36,7 +39,7 @@ if(!$state->bindValue(1, $_POST['blog-title'], PDO::PARAM_STR)
 
 echo json_encode(array(
     'ok' => true,
-    'message' => 'ブログ記事「' . $_POST['blog-title'] . '」が登録されました',
+    'message' => 'ブログ記事「' . $title . '」が登録されました',
 ));
 
 ?>

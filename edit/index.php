@@ -12,7 +12,7 @@
         <div class="container">
             <div class="row pt-4">
                 <div class="col-md-12 mt-3 mb-3">
-                    <h1>研修用ブログ｜記事編集</h1>
+                    <h1><a href="../">研修用ブログ</a>｜記事編集</h1>
                     <?php
                         // GETチェック
                         if(isset($_GET['id'])):

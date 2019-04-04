@@ -7,9 +7,11 @@ $('#add-article').click(function(){
     if(title === ''){
         // タイトルが空の場合、警告を出す
         $('#result').html('<div class="alert alert-warning">ブログのタイトルを付けてください</div>');
-    }else if(title.bytes > 200){
+        return false;
+    }else if(title.bytes() > 200){
         // タイトルが200バイトを超える場合、警告を出す
         $('#result').html('<div class="alert alert-warning">ブログのタイトルが長すぎます</div>');
+        return false;
     }
     // データベース処理実行
     ajaxDBctl('./add.php', 'POST', {

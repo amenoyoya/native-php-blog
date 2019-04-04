@@ -12,7 +12,7 @@
         <div class="container">
             <div class="row pt-4">
                 <div class="col-md-12">
-                    <h1>研修用ブログ｜記事削除</h1>
+                    <h1><a href="../">研修用ブログ</a>｜記事削除</h1>
                     <?php
                         // GETチェック
                         if(!isset($_GET['id'])){
@@ -23,15 +23,24 @@
                                 $pdo = new PDO('mysql:host=localhost.localdomain;dbname=blog;charset=utf8',
                                     'root', 'Exir@SQL190401', array(PDO::ATTR_EMULATE_PREPARES => false)
                                 );
-                                // blogデータベース/articlesテーブルから記事削除
-                                $state = $pdo->prepare('delete from articles where id = ?');
-                                if(!$state->bindValue(1, $_GET['id'], PDO::PARAM_INT)
-                                    || !$state->execute())
+                                // blogデータベース/articlesテーブル内に指定IDの記事が存在するか確認
+                                $state = $pdo->prepare('select * from articles where id = ?');
+                                if($state->bindValue(1, $_GET['id'], PDO::PARAM_INT)
+                                    && $state->execute() && $state->fetch())
                                 {
-                                    echo '<div class="alert alert-danger">記事の削除処理中にエラーが発生しました</div>';
+                                    // blogデータベース/articlesテーブルから記事削除
+                                    $state = $pdo->prepare('delete from articles where id = ?');
+                                    if($state->bindValue(1, $_GET['id'], PDO::PARAM_INT)
+                                        && $state->execute())
+                                    {
+                                        echo '<div class="alert alert-success"><p>対象のブログ記事を削除しました</p><p>3秒後 トップページに戻ります</p></div>';
+                                        echo '<script>setTimeout(function(){ location.href = "../"; }, 3000);</script>';
+                                    }else{
+                                        echo '<div class="alert alert-danger">記事の削除処理中にエラーが発生しました</div>';
+                                    }
                                 }else{
-                                    echo '<div class="alert alert-success"><p>対象のブログ記事を削除しました</p><p>3秒後 トップページに戻ります</p></div>';
-                                    echo '<script>setTimeout(function(){ location.href = "../"; }, 3000);</script>';
+                                    // 無効な記事IDを指定されたとき警告メッセージ
+                                    echo '<div class="alert alert-warning">無効な記事IDが指定されています</div>';
                                 }
                             }catch(PDOException $e){
                                 echo '<div class="alert alert-danger">データベース接続エラー：' . $e->getMessage() . '</div>';
