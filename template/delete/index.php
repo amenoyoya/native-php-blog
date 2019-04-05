@@ -1,0 +1,33 @@
+<?php /* 削除成功時のテンプレート */ ?>
+<!doctype html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>研修用ブログ｜記事削除</title>
+        <!-- stylesheets -->
+        <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row pt-4">
+                <div class="col-md-12">
+                    <h1><a href="../">研修用ブログ</a>｜記事削除</h1>
+                    <div class="alert alert-success">
+                        <p>対象のブログ記事を削除しました</p>
+                        <p>3秒後 トップページに戻ります</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- javascripts -->
+        <script src="../static/js/bootstrap.min.js"></script>
+        <script>
+            setTimeout(function(){
+                location.href = "../";
+            }, 3000); // 3秒後トップページ戻る
+        </script>
+    </body>
+</html>

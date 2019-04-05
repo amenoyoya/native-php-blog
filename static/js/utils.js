@@ -4,23 +4,29 @@ String.prototype.bytes = function () {
  }
  
 
-/* データベース操作Ajaxリクエスト関数 */
+/* Ajaxリクエスト関数 */
 // @url: Ajaxで実行するURL
-// @method: 'POST' or 'GET'
+// @method: 'POST' | 'GET' | 'PUT' | 'DELETE'
 // @data: Ajaxリクエストに付与するデータ
-// @callback: Ajaxリクエストが成功したとき発動する関数 function(data)
-function ajaxDBctl(url, method, data, callback){
+// @callbacks: ステータスコードごとのコールバック関数群
+function requestAjax(url, method, data, callbacks){
     $.LoadingOverlay("show"); // ローディングオーバーレイ表示
     $.ajax({
         url: url,
         type: method,
-        data: data
+        data: data,
+        dataType: 'json',
     })
-    .done(function(data){ // Ajaxリクエストが成功した時発動
-        callback(data);
+    .done(function(data, txtStatus, xhr){ // Ajaxリクエストが成功した時発動
+        console.log('success', data);
+        var func = callbacks[xhr.status]; // ステータスコードごとにコールバック実行
+        if(typeof func === 'function') func(data);
     })
-    .fail(function(data, text, err){ // Ajaxリクエストが失敗した時発動
-        alert("データベースの更新に失敗しました\n" + data.status + "\n" + text + "\n" + err.message);
+    .fail(function(xhr, txtStatus, err){ // Ajaxリクエストが失敗した時発動
+        console.log('failed', xhr);
+        var func = callbacks[xhr.status]; // ステータスコードごとにコールバック実行
+        if(typeof func === 'function') func(xhr.responseJSON);
+        else alert("APIの実行に失敗しました\n" + xhr.status + "\n" + txtStatus + "\n" + err.message); // 定義されていないエラーならalert
     })
     .always(function(data){ // Ajaxリクエストが成功・失敗どちらでも発動
         $.LoadingOverlay("hide"); // ローディングオーバーレイ非表示に
