@@ -1,4 +1,4 @@
-// 記事登録ボタンの実装
+/* 記事登録ボタンの実装 */
 $('#add-article').click(function(){
     var title = $('#blog-title').val(), body = $('#blog-body').val();
 
@@ -14,13 +14,17 @@ $('#add-article').click(function(){
         return false;
     }
     // データベース処理実行
-    ajaxDBctl('./add.php', 'POST', {
+    requestAjax('/api/articles/', 'POST', {
         'blog-title': title, 'blog-body': body
-    }, function(data){
-        if(!data['ok']){ // PHP側でエラーが起こった際はアラート実行
-            alert(data['message']);
-        }else{ // 問題なければ、登録完了メッセージ
+    }, {
+        201: function(data){ // 正常終了
             $('#result').html('<div class="alert alert-success">' + data['message'] + '</div>');
+        },
+        400: function(data){ // リクエストエラー
+            $('#result').html('<div class="alert alert-warning">' + data['message'] + '</div>');
+        },
+        500: function(data){ // サーバーエラー
+            $('#result').html('<div class="alert alert-danger">' + data['message'] + '</div>');
         }
     });
     return false;

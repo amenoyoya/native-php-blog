@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>研修用ブログ｜REST API</title>
+        <!-- stylesheets -->
+        <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row pt-4">
+                <div class="col-md-12 mt-3 mb-3">
+                    <h1><a href="../">研修用ブログ</a>｜REST API</h1>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>API名</th>
+                                <th>HTTPメソッド</th>
+                                <th>パス</th>
+                                <th>必要なパラメータ</th>
+                                <th>ステータスコード</th>
+                                <th>説明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>GET articles</td>
+                                <td>GET</td>
+                                <td>/api/articles/</td>
+                                <td>-</td>
+                                <td>200（OK）</td>
+                                <td>ブログ記事一覧を取得</td>
+                            </tr>
+                            <tr>
+                                <td>POST articles</td>
+                                <td>POST</td>
+                                <td>/api/articles/</td>
+                                <td>blog-title, blog-body</td>
+                                <td>201（Created）</td>
+                                <td>新規ブログ記事を作成</td>
+                            </tr>
+                            <tr>
+                                <td>GET article</td>
+                                <td>GET</td>
+                                <td>/api/articles/</td>
+                                <td>blog-id</td>
+                                <td>200（OK）</td>
+                                <td>ブログ記事を1件取得</td>
+                            </tr>
+                            <tr>
+                                <td>PUT articles</td>
+                                <td>PUT</td>
+                                <td>/api/articles/</td>
+                                <td>blog-id, blog-title, blog-body</td>
+                                <td>200（OK）</td>
+                                <td>ブログ記事を更新</td>
+                            </tr>
+                            <tr>
+                                <td>DELETE articles</td>
+                                <td>DELETE</td>
+                                <td>/api/articles/</td>
+                                <td>blog-id</td>
+                                <td>200（OK）</td>
+                                <td>ブログ記事を削除</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- javascripts -->
+        <script src="../static/js/bootstrap.min.js"></script>
+    </body>
+</html>
