@@ -1,5 +1,6 @@
 <?php
 
+require_once('../../config/mysql.php');
 require_once('./get.php');
 require_once('./post.php');
 require_once('./put.php');
@@ -9,8 +10,8 @@ $data = []; // 処理結果
 
 // PDOでMySQLデータベースに接続
 try{
-    $pdo = new PDO('mysql:host=localhost.localdomain;dbname=blog;charset=utf8',
-        'root', 'Exir@SQL190401', array(PDO::ATTR_EMULATE_PREPARES => false)
+    $pdo = new PDO("mysql:host=${MYSQL_HOST};dbname=${MYSQL_DB_NAME};charset=utf8",
+        $MYSQL_USER, $MYSQL_PASSWORD, array(PDO::ATTR_EMULATE_PREPARES => false)
     );
     // 受信したデータパラメータをパージ
     $params = [];
