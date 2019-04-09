@@ -6,11 +6,15 @@ $('#add-article').click(function(){
     // 入力チェック
     if(title === ''){
         // タイトルが空の場合、警告を出す
-        $('#result').html('<div class="alert alert-warning">ブログのタイトルを付けてください</div>');
+        $('#result').html('<div class="alert alert-warning">タイトルは入力必須です</div>');
         return false;
     }else if(title.bytes() > 200){
         // タイトルが200バイトを超える場合、警告を出す
-        $('#result').html('<div class="alert alert-warning">ブログのタイトルが長すぎます</div>');
+        $('#result').html('<div class="alert alert-warning">タイトルは200バイト以内で指定してください</div>');
+        return false;
+    }else if(body.length > 100){
+        // 本文が100文字を超える場合、警告を出す
+        $('#result').html('<div class="alert alert-warning">本文は100文字以内で指定してください</div>');
         return false;
     }
     // データベース処理実行

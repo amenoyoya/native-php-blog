@@ -10,8 +10,9 @@ $data = []; // 処理結果
 
 // PDOでMySQLデータベースに接続
 try{
-    $pdo = new PDO("mysql:host=${MYSQL_HOST};dbname=${MYSQL_DB_NAME};charset=utf8",
-        $MYSQL_USER, $MYSQL_PASSWORD, array(PDO::ATTR_EMULATE_PREPARES => false)
+    $_ = function($s){return $s;}; // 定数展開用
+    $pdo = new PDO("mysql:host={$_(MYSQL_HOST)};dbname={$_(MYSQL_DB_NAME)};charset=utf8",
+        MYSQL_USER, MYSQL_PASSWORD, array(PDO::ATTR_EMULATE_PREPARES => false)
     );
     // 受信したデータパラメータをパージ
     $params = [];
