@@ -11,7 +11,7 @@ $ chmod 700 keys
 $ cd keys
 
 // パスフレーズなしで鍵生成
-$ ssh-keygen -t rsa -b 4096 -f jwt.key
+$ ssh-keygen -t rsa -b 4096 -f blog.key
 $ openssl rsa -in blog.key -pubout -outform PEM -out blog.key.pub
 writing RSA key
 
