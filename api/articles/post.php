@@ -1,6 +1,8 @@
 <?php
 /** POSTメソッド: 新規ブログ記事の作成 **/
 
+require_once('./validation.php');
+
 // 新規記事作成
 // @params: 受信パラメータ
 // @pdo: PDOオブジェクト
@@ -17,19 +19,8 @@ function createArticle($params, $pdo){
     $body = $params['blog-body'];
 
     // バリデーションチェック
-    if($title === ''){
-        return [
-            'status' => 400, 'message' => 'タイトルは入力必須です',
-        ];
-    }else if(strlen($title) > 200){
-        return [
-            'status' => 400, 'message' => 'タイトルは200バイト以内で指定してください',
-        ];
-    }else if(mb_strlen($body) > 1000){
-        return [
-            'status' => 400, 'message' => '本文は100文字以内で指定してください',
-        ];
-    }
+    if(!isValid($title, $body, $res)) return $res;
+    
 
     // articlesテーブルにデータ挿入
     $state = $pdo->prepare('insert into articles (title, body) values (?, ?)');
