@@ -1,6 +1,8 @@
 <?php
 /** PUTメソッド: ブログ記事の更新 **/
 
+require_once('./validation.php');
+
 // 記事更新
 // @params: 受信パラメータ
 // @pdo: PDOオブジェクト
@@ -26,6 +28,9 @@ function updateArticle($params, $pdo){
             'status' => 400, 'message' => '無効な記事IDが指定されています',
         ];
     }
+
+    // バリデーションチェック
+    if(!isValid($title, $body, $res)) return $res;
 
     // articlesテーブルを更新
     $state = $pdo->prepare('update articles set title=?, body=? where id=?');

@@ -17,11 +17,12 @@
                         <div class="form-group">
                             <label for="blog-title">タイトル</label>
                             <input type="text" class="form-control" id="blog-title">
-                            <small class="text-muted">ブログタイトルは200バイト以内で指定してください。</small>
+                            <small class="text-muted">タイトルは200バイト以内で指定してください。</small>
                         </div>
                         <div class="form-group">
                             <label for="blog-body">本文</label>
                             <textarea class="form-control" id="blog-body"></textarea>
+                            <small class="text-muted">本文は100文字以内で指定してください。</small>
                         </div>
                         <button type="button" class="btn btn-primary" id="add-article">投稿</button>
                     </form>

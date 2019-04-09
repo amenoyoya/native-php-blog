@@ -8,10 +8,8 @@ require_once(dirname(__FILE__) . '/config/api.php');
 // @data: 送信するデータ
 // @return: [status: レスポンスコード, json: JSONデータ, response: レスポンステキスト]
 function callAPI($method, $data=[]){
-    global $API_URL;
-
     $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, $API_URL);
+    curl_setopt($curl, CURLOPT_URL, API_URL);
     curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); // 証明書の検証を行わない
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);  // curl_execの結果を文字列で返す
