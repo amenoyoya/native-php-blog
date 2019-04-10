@@ -4,7 +4,7 @@ require_once('../functions.php');
 // GETチェック
 if(isset($_GET['id'])){
     // 記事削除
-    $res = callAPI('DELETE', ['blog-id' => $_GET['id']]);
+    $res = callAPI('DELETE', ['article-id' => $_GET['id']]);
     switch($res['status']){
     case 200:
         // 削除完了ページ

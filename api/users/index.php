@@ -2,6 +2,7 @@
 
 require_once('../../config/mysql.php');
 require_once('./post.php');
+require_once('./get.php');
 
 $data = []; // 処理結果
 
@@ -19,6 +20,10 @@ try{
     case 'POST':
         // 新規ユーザー登録
         $data = registerUser($params, $pdo);
+        break;
+    case 'GET':
+        // ユーザー認証しトークンを発行
+        $data = getUserToken($params, $pdo);
         break;
     default:
         // サポートされていないHTTPメソッドがリクエストされた

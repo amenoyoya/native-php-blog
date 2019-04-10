@@ -1,6 +1,6 @@
 /* 記事登録ボタンの実装 */
 $('#add-article').click(function(){
-    var title = $('#blog-title').val(), body = $('#blog-body').val();
+    var title = $('#article-title').val(), body = $('#article-body').val();
 
     $('#result').html(''); // 結果欄をクリアしておく
     // 入力チェック
@@ -19,7 +19,7 @@ $('#add-article').click(function(){
     }
     // データベース処理実行
     requestAjax('/api/articles/', 'POST', {
-        'blog-title': title, 'blog-body': body
+        'article-title': title, 'article-body': body
     }, {
         201: function(data){ // 正常終了
             $('#result').html('<div class="alert alert-success">' + data['message'] + '</div>');

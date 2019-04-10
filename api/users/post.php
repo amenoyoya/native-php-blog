@@ -19,13 +19,15 @@ function registerUser($params, $pdo){
     $password = $params['user-password'];
 
     // バリデーションチェック
-    if(!isValid($name, $password, $response)) return $response;
+    if(!isValid($name, $password, $response, $pdo)) return $response;
     
+    // パスワードはハッシュ化して保存する
+    $hash = password_hash($password, PASSWORD_BCRYPT);
 
     // usersテーブルにデータ挿入
     $state = $pdo->prepare('insert into users (name, password) values (?, ?)');
     if(!$state->bindValue(1, $name, PDO::PARAM_STR)
-        || !$state->bindValue(2, $password, PDO::PARAM_STR)
+        || !$state->bindValue(2, $hash, PDO::PARAM_STR)
         || !$state->execute())
     {
         return [

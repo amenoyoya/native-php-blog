@@ -15,15 +15,15 @@
                 <div class="col-md-12 mt-3 mb-3">
                     <h1><a href="../">研修用ブログ</a>｜記事編集</h1>
                     <form>
-                        <input type="hidden" id="blog-id" value="<?php echo $article['id'] ?>">
+                        <input type="hidden" id="article-id" value="<?php echo $article['id'] ?>">
                         <div class="form-group">
-                            <label for="blog-title">タイトル</label>
-                            <input type="text" class="form-control" id="blog-title" value="<?php echo $article['title'] ?>">
+                            <label for="article-title">タイトル</label>
+                            <input type="text" class="form-control" id="article-title" value="<?php echo $article['title'] ?>">
                             <small class="text-muted">タイトルは200バイト以内で指定してください。</small>
                         </div>
                         <div class="form-group">
-                            <label for="blog-body">本文</label>
-                            <textarea class="form-control" id="blog-body"><?php echo $article['body'] ?></textarea>
+                            <label for="article-body">本文</label>
+                            <textarea class="form-control" id="article-body"><?php echo $article['body'] ?></textarea>
                             <small class="text-muted">本文は100文字以内で指定してください。</small>
                         </div>
                         <button type="button" class="btn btn-primary" id="update-article">更新</button>

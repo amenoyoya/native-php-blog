@@ -4,7 +4,7 @@ require_once('../functions.php');
 // GETチェック
 if(isset($_GET['id'])){
     // 記事取得
-    $res = callAPI('GET', ['blog-id' => $_GET['id']]);
+    $res = callAPI('GET', ['article-id' => $_GET['id']]);
     switch($res['status']){
     case 200:
         // 編集ページ

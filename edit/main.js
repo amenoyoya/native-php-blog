@@ -1,6 +1,6 @@
 /* 記事更新ボタンの実装 */
 $('#update-article').click(function(){
-    var id = $('#blog-id').val(), title = $('#blog-title').val(), body = $('#blog-body').val();
+    var id = $('#article-id').val(), title = $('#article-title').val(), body = $('#article-body').val();
     
     $('#result').html(''); // 結果欄をクリアしておく
     // 入力チェック
@@ -19,7 +19,7 @@ $('#update-article').click(function(){
     }
     // データベース処理実行
     requestAjax('/api/articles/', 'PUT', {
-        'blog-id': id, 'blog-title': title, 'blog-body': body
+        'article-id': id, 'article-title': title, 'article-body': body
     },  {
         200: function(data){ // 正常終了
             $('#result').html('<div class="alert alert-success">' + data['message'] + '</div>');
