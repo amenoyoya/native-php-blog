@@ -13,20 +13,25 @@
             <div class="row pt-4">
                 <div class="col-md-12 mt-3 mb-3">
                     <h1><a href="../">研修用ブログ</a>｜新規記事登録</h1>
-                    <form>
-                        <input type="hidden" id="user-token" value="<?php echo $_SESSION['user-token'] ?>">
-                        <div class="form-group">
-                            <label for="article-title">タイトル</label>
-                            <input type="text" class="form-control" id="article-title">
-                            <small class="text-muted">タイトルは200バイト以内で指定してください。</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="article-body">本文</label>
-                            <textarea class="form-control" id="article-body"></textarea>
-                            <small class="text-muted">本文は100文字以内で指定してください。</small>
-                        </div>
-                        <button type="button" class="btn btn-primary" id="add-article">投稿</button>
-                    </form>
+                    <?php if(isset($error_message)): ?>
+                        <?php echo $error_message ?>
+                    <?php else: ?>
+                        <p class="text-muted">筆者：<?php echo $user['name'] ?></p>
+                        <form>
+                            <input type="hidden" id="user-token" value="<?php echo $_SESSION['user-token'] ?>">
+                            <div class="form-group">
+                                <label for="article-title">タイトル</label>
+                                <input type="text" class="form-control" id="article-title">
+                                <small class="text-muted">タイトルは200バイト以内で指定してください。</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="article-body">本文</label>
+                                <textarea class="form-control" id="article-body"></textarea>
+                                <small class="text-muted">本文は100文字以内で指定してください。</small>
+                            </div>
+                            <button type="button" class="btn btn-primary" id="add-article">投稿</button>
+                        </form>
+                    <?php endif ?>
                 </div>
 
                 <div class="col-md-12 mt-3 mb-3">

@@ -10,6 +10,9 @@ $('#add-article').click(function(){
         201: function(data){ // 正常終了
             $('#result').html('<div class="alert alert-success">' + data['message'] + '</div>');
         },
+        401: function(data){ // 認証エラー
+            $('#result').html('<div class="alert alert-info">' + data['message'] + '</div>');
+        },
         400: function(data){ // リクエストエラー
             $('#result').html('<div class="alert alert-warning">' + data['message'] + '</div>');
         },

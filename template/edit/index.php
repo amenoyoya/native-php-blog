@@ -14,7 +14,9 @@
             <div class="row pt-4">
                 <div class="col-md-12 mt-3 mb-3">
                     <h1><a href="../">研修用ブログ</a>｜記事編集</h1>
+                    <p class="text-muted">筆者: <?php echo $user['name'] ?></p>
                     <form>
+                        <input type="hidden" id="user-token" value="<?php echo $_SESSION['user-token'] ?>">
                         <input type="hidden" id="article-id" value="<?php echo $article['id'] ?>">
                         <div class="form-group">
                             <label for="article-title">タイトル</label>
