@@ -14,26 +14,31 @@
             <div class="row pt-4">
                 <div class="col-md-12">
                     <h1>研修用ブログ｜記事一覧</h1>
-                    <div class="card-deck">
-                        <?php foreach($articles as $article): ?>
-                            <div class="card">
-                                <div class="card-body">
-                                    <!-- 記事タイトル -->
-                                    <h2 class="card-title"><?php echo $article['title'] ?></div>
-                                    <!-- 編集ボタン -->
-                                    <a href="./edit/?id=<?php echo $article['id'] ?>" style="position: absolute; top: 5px; right: 60px; color: #ffffff" class="btn btn-primary">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <!-- 削除ボタン -->
-                                    <a href="./delete/?id=<?php echo $article['id'] ?>" style="position: absolute; top: 5px; right: 5px; color: #ffffff" class="btn btn-danger">
-                                        <i class="fas fa-backspace"></i>
-                                    </a>
-                                    <!-- 記事本文 -->
-                                    <pre class="card-text pl-4 pb-4"><?php echo $article['body'] ?></pre>
+                    <?php if(isset($error_message)): /* エラー400, 500 が発生した場合、エラーメッセージ表示 */ ?>
+                        <?php echo $error_message ?>
+                    <?php else: /*  記事が取得できた場合、一覧表示 */ ?>
+                        <p class="text-muted">筆者：<?php echo $user['name'] ?></p>
+                        <div class="card-deck">
+                            <?php foreach($articles as $article): ?>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <!-- 記事タイトル -->
+                                        <h2 class="card-title"><?php echo $article['title'] ?></div>
+                                        <!-- 編集ボタン -->
+                                        <a href="./edit/?id=<?php echo $article['id'] ?>" style="position: absolute; top: 5px; right: 60px; color: #ffffff" class="btn btn-primary">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <!-- 削除ボタン -->
+                                        <a href="./delete/?id=<?php echo $article['id'] ?>" style="position: absolute; top: 5px; right: 5px; color: #ffffff" class="btn btn-danger">
+                                            <i class="fas fa-backspace"></i>
+                                        </a>
+                                        <!-- 記事本文 -->
+                                        <pre class="card-text pl-4 pb-4"><?php echo $article['body'] ?></pre>
+                                    </div>
                                 </div>
-                            </div>
-                        <?php endforeach ?>
-                    </div>
+                            <?php endforeach ?>
+                        </div>
+                    <?php endif ?>
                     <div class="mt-4">
                         <a class="btn btn-primary btn-block btn-lg" href="./add/"><i class="fas fa-plus-circle"></i> 追加</a>
                     </div>

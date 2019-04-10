@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>研修用ブログ｜新規記事登録</title>
+        <title>研修用ブログ｜ログイン</title>
         <!-- stylesheets -->
         <link rel="stylesheet" href="../static/css/bootstrap.min.css">
     </head>
@@ -12,21 +12,22 @@
         <div class="container">
             <div class="row pt-4">
                 <div class="col-md-12 mt-3 mb-3">
-                    <h1><a href="../">研修用ブログ</a>｜新規記事登録</h1>
+                    <h1><a href="../">研修用ブログ</a>｜ログイン</h1>
                     <form>
-                        <input type="hidden" id="user-token" value="<?php echo $_SESSION['user-token'] ?>">
                         <div class="form-group">
-                            <label for="article-title">タイトル</label>
-                            <input type="text" class="form-control" id="article-title">
-                            <small class="text-muted">タイトルは200バイト以内で指定してください。</small>
+                            <label for="user-name">ユーザー名</label>
+                            <input type="text" class="form-control" id="user-name">
                         </div>
                         <div class="form-group">
-                            <label for="article-body">本文</label>
-                            <textarea class="form-control" id="article-body"></textarea>
-                            <small class="text-muted">本文は100文字以内で指定してください。</small>
+                            <label for="user-password">パスワード</label>
+                            <input type="password" class="form-control" id="user-password">
                         </div>
-                        <button type="button" class="btn btn-primary" id="add-article">投稿</button>
+                        <button type="button" class="btn btn-primary" id="login-user">ログイン</button>
                     </form>
+                </div>
+
+                <div class="col-md-12 mt-3 mb-3">
+                    ユーザー登録をしていない場合は、<a href="../register/">登録ページ</a>へ
                 </div>
 
                 <div class="col-md-12 mt-3 mb-3">

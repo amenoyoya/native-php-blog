@@ -13,6 +13,9 @@
             <div class="row pt-4">
                 <div class="col-md-12 mt-3 mb-3">
                     <h1><a href="../">研修用ブログ</a>｜REST API</h1>
+
+                    <hr>
+
                     <h2>ブログ記事関連</h2>
                     <table class="table">
                         <thead>
@@ -69,6 +72,42 @@
                         </tbody>
                     </table>
 
+                    <hr>
+
+                    <h2>ユーザー認証関連</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>API名</th>
+                                <th>HTTPメソッド</th>
+                                <th>パス</th>
+                                <th>必要なパラメータ</th>
+                                <th>ステータスコード</th>
+                                <th>説明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>GET users</td>
+                                <td>GET</td>
+                                <td>/api/users/</td>
+                                <td>user-name, user-password</td>
+                                <td>200（OK）</td>
+                                <td>ユーザー認証＆トークン取得</td>
+                            </tr>
+                            <tr>
+                                <td>POST users</td>
+                                <td>POST</td>
+                                <td>/api/users/</td>
+                                <td>user-name, user-password</td>
+                                <td>201（Created）</td>
+                                <td>新規ユーザー登録</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <hr>
+
                     <h2>ユーザー情報関連</h2>
                     <table class="table">
                         <thead>
@@ -83,20 +122,12 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>POST users</td>
-                                <td>POST</td>
-                                <td>/api/users/</td>
-                                <td>user-name, user-password</td>
-                                <td>201（Created）</td>
-                                <td>新規ユーザー登録</td>
-                            </tr>
-                            <tr>
                                 <td>GET user</td>
                                 <td>GET</td>
-                                <td>/api/users/</td>
-                                <td>user-name, user-password</td>
+                                <td>/api/user/</td>
+                                <td>user-token</td>
                                 <td>200（OK）</td>
-                                <td>ユーザーを認証し、トークンを発行する</td>
+                                <td>ユーザー情報（ID, ユーザー名）を取得</td>
                             </tr>
                         </tbody>
                     </table>

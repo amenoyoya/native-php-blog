@@ -1,40 +1,6 @@
 <?php
 
-/** ユーザー認証チェックおよび入力値チェック関連 **/
-
-require_once('../users/tokenizer.php'); // トークン関連ライブラリ
-
-/* ユーザー認証チェック */
-// @params: 受信パラメータ
-// @response: 認証エラーが発生した場合にレスポンスデータが渡される
-// @return: ユーザー認証済みならユーザーID, ユーザー未認証ならfalse
-function getUserID($params, &$response){
-    // パラメータチェック
-    if(!isset($params['user-token'])){
-        $response = [
-            'status' => 400, 'message' => 'パラメータが正しく指定されていません',
-        ];
-        return false;
-    }
-
-    // トークン認証
-    // 暗号化パスワードはMySQLのパスワードを流用
-    $user = decryptToken(MYSQL_PASSWORD, $params['user-token']);
-    if(!$user){
-        $response = [
-            'status' => 400, 'message' => 'ユーザーが認証されていません',
-        ];
-        return false;
-    }
-    if(!isset($user['id'])){
-        $response = [
-            'status' => 500, 'message' => 'ユーザーIDが取得できませんでした',
-        ];
-        return false;
-    }
-    return $user['id'];
-}
-
+/** 入力値チェック関連 **/
 
 /* 記事新規作成・更新時の入力値チェック関数 */
 // @title: ブログタイトル

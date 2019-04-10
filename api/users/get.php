@@ -44,8 +44,11 @@ function getUserToken($params, $pdo){
     // ユーザー認証できたらトークンを発行
     // - 暗号化キーはMySQLのパスワードを流用
     // - 有効期間は1日間
-    // - 含める情報はユーザーIDのみ
+    // - 含める情報はユーザーIDとユーザー名
     return [
-        'status' => 200, 'token' => encryptToken(MYSQL_PASSWORD, 60 * 60 * 24, ['id' => $row['id']]),
+        'status' => 200,
+        'token' => encryptToken(MYSQL_PASSWORD, 60 * 60 * 24, [
+            'id' => $row['id'], 'name' => $row['name'],
+        ]),
     ];
 }
