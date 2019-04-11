@@ -1,10 +1,20 @@
 <?php
 require_once('../functions.php');
 
+session_start(); // セッション開始
+
+// セッションが保存されていなければログインページにリダイレクト
+if(!isset($_SESSION['user-token'])){
+    header('Location: ../login/');
+    exit;
+}
+
 // GETチェック
 if(isset($_GET['id'])){
     // 記事削除
-    $res = callAPI('DELETE', ['blog-id' => $_GET['id']]);
+    $res = callAPI('articles', 'DELETE', [
+        'user-token' => $_SESSION['user-token'], 'article-id' => $_GET['id']
+    ]);
     switch($res['status']){
     case 200:
         // 削除完了ページ

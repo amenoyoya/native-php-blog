@@ -4,12 +4,13 @@
 require_once(dirname(__FILE__) . '/config/api.php');
 
 /* REST API 呼び出し */
+// @api: 呼び出すAPI名
 // @method: GET|POST|PUT|DELETE
 // @data: 送信するデータ
 // @return: [status: レスポンスコード, json: JSONデータ, response: レスポンステキスト]
-function callAPI($method, $data=[]){
+function callAPI($api, $method, $data=[]){
     $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, API_URL);
+    curl_setopt($curl, CURLOPT_URL, API_URL . $api . '/');
     curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); // 証明書の検証を行わない
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);  // curl_execの結果を文字列で返す
