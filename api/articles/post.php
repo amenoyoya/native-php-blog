@@ -4,12 +4,16 @@
 require_once('./validation.php');
 require_once('../user/verifier.php');
 
-// 新規記事作成
-// @params: 受信パラメータ
-// @pdo: PDOオブジェクト
-// @return: [status: ステータスコード, message: 処理結果のメッセージ]
-//           ステータスコード: 201 Created（正常に作成完了）, 400 Bad Request（リクエストが不正）,
-//                            401 Unauthorized（認証が必要）, 500 Internal Server Error（データベース処理エラー）
+/**
+ * 新規記事作成API
+ * 
+ * @param array $params: 受信パラメータ
+ * @param PDO $pdo: PDOオブジェクト
+ * 
+ * @return array: [status: ステータスコード, message: 処理結果のメッセージ]
+ *           sttaus: 201 Created（正常に作成完了）, 400 Bad Request（リクエストが不正）,
+ *                   401 Unauthorized（認証が必要）, 500 Internal Server Error（データベース処理エラー）
+ */
 function createArticle($params, $pdo){
     // ユーザー認証チェック
     if(false === ($user = getUserInfo($params, $response))) return $response;

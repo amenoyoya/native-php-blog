@@ -12,12 +12,12 @@ if(!isset($_SESSION['user-token'])){
 
 // ユーザー情報取得
 $res = callAPI('user', 'GET', ['user-token' => $_SESSION['user-token']])['json'];
-if($res['status'] == 401){ // ユーザー未ログインならログインページにリダイレクト
+if($res['status'] === 401){ // ユーザー未ログインならログインページにリダイレクト
     header('Location: ../login/');
     exit;
 }
 
-if($res['status'] == 200){ // ユーザーがログインしているならユーザー情報セット
+if($res['status'] === 200){ // ユーザーがログインしているならユーザー情報セット
     $user = $res['user'];
 }else{ // エラー発生時はエラーメッセージをセット
     $error_message = $res['message'];

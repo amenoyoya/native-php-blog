@@ -1,12 +1,15 @@
 <?php
 
-/** ユーザー登録・認証時の入力値チェック関数 **/
-
-// @name: ユーザー名
-// @password: パスワード
-// @response: 入力値エラーが発生した場合にレスポンスデータが渡される
-// @pdo[=NULL]: PDOオブジェクトを指定した場合はユーザー名の重複がないかチェックする
-// @return: true=入力値妥当, false=入力値不正
+/**
+ * ユーザー登録・認証時の入力値チェック関数
+ * 
+ * @param string $name: ユーザー名
+ * @param string $password: パスワード
+ * @param array &$response: 入力値エラーが発生した場合にレスポンスデータが渡される
+ * @param PDO $pdo (optional): PDOオブジェクトを指定した場合はユーザー名の重複がないかチェックする
+ * 
+ * @return bool: true=入力値妥当, false=入力値不正
+ */
 function isValid($name, $password, &$response, $pdo=NULL){
     // ユーザー名入力チェック
     if($name === ''){

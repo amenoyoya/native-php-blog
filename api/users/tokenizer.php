@@ -1,11 +1,15 @@
 <?php
 /** JSON簡易暗号化（トークン発行機能）関連 **/
 
-/* トークン発行 */
-// @password: 暗号化・復号パスワード
-// @expire: トークンの有効期間（秒）
-// @json: 暗号化するJSONデータ（expireキーは設定しないこと）
-// @return: string トークン
+/**
+ * トークン発行関数
+ * 
+ * @param string $password: 暗号化・復号パスワード
+ * @param int $expire: トークンの有効期間（秒）
+ * @param array $json: 暗号化するJSONデータ（expireキーは設定しないこと）
+ * 
+ * @return string: トークン
+ */
 function encryptToken($password, $expire, $json){
     // JSONデータに有効期限を設定
     $json['expire'] = time() + $expire;
@@ -36,10 +40,14 @@ function encryptToken($password, $expire, $json){
     return base64_encode($authdata_str);
 }
 
-/* トークン認証＆JSONデータ復号 */
-// @password: 暗号化・復号パスワード
-// @token: 発行されたトークン
-// @return: 成功時=[JSONデータ], 失敗時=false
+/**
+ * トークン認証＆JSONデータ復号
+ * 
+ * @param string $password: 暗号化・復号パスワード
+ * @param string $token: 発行されたトークン
+ *
+ * @return array|bool: 成功時=[JSONデータ], 失敗時=false
+ */
 function decryptToken($password, $token){
     // トークンを認証用JSONデータに変換
     $authdata = json_decode(base64_decode($token), true);

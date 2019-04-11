@@ -14,13 +14,13 @@ if(!isset($_SESSION['user-token'])){
 $res = callAPI('articles', 'GET', ['user-token' => $_SESSION['user-token']])['json'];
 
 // ユーザー認証エラーが発生した場合はログインページにリダイレクト
-if($res['status'] == 401){
+if($res['status'] === 401){
     header('Location: ./login/');
     exit;
 }
 
 // 正常に記事取得できた場合は、各種情報をセット
-if($res['status'] == 200){
+if($res['status'] === 200){
     $articles = isset($res['articles'])? $res['articles']: [];
     $user = $res['user'];
 }

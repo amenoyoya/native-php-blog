@@ -4,12 +4,16 @@
 require_once('./validation.php');
 require_once('../user/verifier.php');
 
-/* 記事削除 */
-// @params: 受信パラメータ
-// @pdo: PDOオブジェクト
-// @return: [status: ステータスコード, message: 処理結果のメッセージ]
-//           ステータスコード: 200 OK（正常に更新完了）, 400 Bad Request（リクエストが不正）,
-//                            401 Unauthorized（認証が必要）, 500 Internal Server Error（データベース処理エラー）
+/**
+ * 記事削除API
+ * 
+ * @param array $params: 受信パラメータ
+ * @param PDO $pdo: PDOオブジェクト
+ * 
+ * @return array: [status: ステータスコード, message: 処理結果のメッセージ]
+ *           status: 200 OK（正常に更新完了）, 400 Bad Request（リクエストが不正）,
+ *                   401 Unauthorized（認証が必要）, 500 Internal Server Error（データベース処理エラー）
+ */
 function deleteArticle($params, $pdo){
     // ユーザー認証チェック
     if(false === ($user = getUserInfo($params, $response))) return $response;

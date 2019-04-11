@@ -2,11 +2,15 @@
 
 /** 入力値チェック関連 **/
 
-/* 記事新規作成・更新時の入力値チェック関数 */
-// @title: ブログタイトル
-// @body: ブログ本文
-// @response: 入力値エラーが発生した場合にレスポンスデータが渡される
-// @return: true=入力値妥当, false=入力値不正
+/**
+ * 記事新規作成・更新時の入力値チェック関数
+ * 
+ * @param string $title: ブログタイトル
+ * @param string $body: ブログ本文
+ * @param array &$response: 入力値エラーが発生した場合にレスポンスデータが渡される
+ * 
+ * @return bool: true=入力値妥当, false=入力値不正
+ */
 function isValid($title, $body, &$response){
     if($title === ''){
         $response = [
@@ -30,12 +34,16 @@ function isValid($title, $body, &$response){
 }
 
 
-/* 記事の存在確認 */
-// @pdo: PDOオブジェクト
-// @user_id: ユーザーID
-// @article_id: 記事ID
-// @response: エラーが発生した場合にレスポンスデータが渡される
-// @return: 記事が存在するか
+/**
+ * 記事の存在確認
+ * 
+ * @param PDO $pdo: PDOオブジェクト
+ * @param int $user_id: ユーザーID
+ * @param int $article_id: 記事ID
+ * @param array &$response: エラーが発生した場合にレスポンスデータが渡される
+ * 
+ * @return bool: 記事が存在するか
+ */
 function isArticleExists($pdo, $user_id, $article_id, &$response){
     $state = $pdo->prepare('select * from articles where user_id=? and id=?');
     if(!$state->bindValue(1, $user_id, PDO::PARAM_INT)

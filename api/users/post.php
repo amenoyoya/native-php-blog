@@ -3,11 +3,15 @@
 
 require_once('./validation.php');
 
-// 新規ユーザー登録
-// @params: 受信パラメータ
-// @pdo: PDOオブジェクト
-// @return: [status: ステータスコード, message: 処理結果のメッセージ]
-//           ステータスコード: 201 Created（正常に登録完了）, 400 Bad Request（リクエストが不正）, 500 Internal Server Error（データベース処理エラー）
+/**
+ * 新規ユーザー登録
+ * 
+ * @param array $params: 受信パラメータ
+ * @param PDO $pdo: PDOオブジェクト
+ * 
+ * @return array: [status: ステータスコード, message: 処理結果のメッセージ]
+ *           status: 201 Created（正常に登録完了）, 400 Bad Request（リクエストが不正）, 500 Internal Server Error（データベース処理エラー）
+ */
 function registerUser($params, $pdo){
     // パラメータチェック
     if(!isset($params['user-name']) || !isset($params['user-password'])){

@@ -4,11 +4,15 @@
 require_once('./validation.php');
 require_once('../user/verifier.php');
 
-/* ブログ記事一覧の取得 */
-// @params: 受信パラメータ
-// @pdo: PDOオブジェクト
-// @return: [status: ステータスコード, articles: [記事オブジェクトの配列], article: 単一記事, message: エラーメッセージ]
-//           ステータスコード: 200 OK（正常に取得完了）, 400 Bad Request, 401 Unauthorized, 500 Internal Server Error
+/**
+ * ブログ記事一覧の取得API
+ * 
+ * @param array $params: 受信パラメータ
+ * @param PDO $pdo: PDOオブジェクト
+ * 
+ * @return array: [status: ステータスコード, articles: [記事オブジェクトの配列], article: 単一記事, message: エラーメッセージ]
+ *           status: 200 OK（正常に取得完了）, 400 Bad Request, 401 Unauthorized, 500 Internal Server Error
+ */
 function getArticles($params, $pdo){
     // ユーザー認証チェック
     if(false === ($user = getUserInfo($params, $response))) return $response;
@@ -38,7 +42,19 @@ function getArticles($params, $pdo){
 }
 
 
-/* 単一記事の取得: getArticles内で呼び出される */
+/**
+ * 単一記事の取得
+ * 
+ * @internal
+ * getArticles内で呼び出される
+ * 
+ * @param PDO $pdo: PDOオブジェクト
+ * @param array $user: [id: ユーザーID, name: ユーザー名]
+ * @param int $article_id: 記事ID
+ * 
+ * @return array: [status: ステータスコード, article: 単一記事, message: エラーメッセージ]
+ *           status: 200 OK（正常に取得完了）, 400 Bad Request, 500 Internal Server Error
+ */
 function getArticle($pdo, $user, $article_id){
     $state = $pdo->prepare('select * from articles where user_id=? and id=?');
     if(!$state->bindValue(1, $user['id'], PDO::PARAM_INT)

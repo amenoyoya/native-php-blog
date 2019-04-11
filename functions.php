@@ -3,11 +3,14 @@
 
 require_once(dirname(__FILE__) . '/config/api.php');
 
-/* REST API 呼び出し */
-// @api: 呼び出すAPI名
-// @method: GET|POST|PUT|DELETE
-// @data: 送信するデータ
-// @return: [status: レスポンスコード, json: JSONデータ, response: レスポンステキスト]
+/**
+ * REST API 呼び出し関数
+ * 
+ * @param string $api: 呼び出すAPI名
+ * @param string $method: GET|POST|PUT|DELETE
+ * @param array $data: 送信するデータ
+ * @return array: [status: レスポンスコード, json: JSONデータ, response: レスポンステキスト]
+ */
 function callAPI($api, $method, $data=[]){
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, API_URL . $api . '/');

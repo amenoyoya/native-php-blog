@@ -3,11 +3,15 @@
 
 require_once('./tokenizer.php');
 
-/* ユーザー認証＆トークン取得 */
-// @params: 受信パラメータ
-// @pdo: PDOオブジェクト
-// @return: [status: ステータスコード, token: トークン]
-//           ステータスコード: 200 OK（正常に取得完了）, 400 Bad Request（ユーザー認証失敗）
+/**
+ * ユーザー認証＆トークン取得API
+ * 
+ * @param array $params: 受信パラメータ
+ * @param PDO $pdo: PDOオブジェクト
+ * 
+ * @return array: [status: ステータスコード, token: トークン]
+ *           status: 200 OK（正常に取得完了）, 400 Bad Request（ユーザー認証失敗）
+ */
 function getUserToken($params, $pdo){
     // パラメータチェック
     if(!isset($params['user-name']) || !isset($params['user-password'])){
