@@ -61,47 +61,14 @@ function isValid($title, $body, &$response){
       return false;
   }
   if(strlen($title) > 200){
-      $data = [
+      $response = [
           'status' => 400, 'message' => 'タイトルは200バイト以内で指定してください',
       ];
       return false;
   }
   if(mb_strlen($body) > 1000){
-      $data = [
-          'status' => 400, 'message' => '本文は100文字以内で指定してください',
-      ];
-      return false;
-  }
-  return true;
-}
-
-
-/**
- * 記事の存在確認
- * 
- * @internal
- * 
- * @param PDO $pdo: PDOオブジェクト
- * @param int $user_id: ユーザーID
- * @param int $article_id: 記事ID
- * @param array &$response: エラーが発生した場合にレスポンスデータが渡される
- * 
- * @return bool: 記事が存在するか
- */
-function isArticleExists($pdo, $user_id, $article_id, &$response){
-  $state = $pdo->prepare('select * from articles where user_id=? and id=?');
-  if(!$state->bindValue(1, $user_id, PDO::PARAM_INT)
-      || !$state->bindValue(2, $article_id, PDO::PARAM_INT)
-      || !$state->execute())
-  {
       $response = [
-          'status' => 500, 'message' => '記事更新中にエラーが発生しました',
-      ];
-      return false;
-  }
-  if(!$state->fetch()){
-      $response = [
-          'status' => 400, 'message' => '無効な記事IDが指定されています',
+          'status' => 400, 'message' => '本文は1000文字以内で指定してください',
       ];
       return false;
   }

@@ -16,7 +16,8 @@
 
                     <hr>
 
-                    <h2>ブログ記事関連</h2>
+                    <h2>ブログ記事関連API</h2>
+                    <p>データベース: articlesテーブル</p>
                     <table class="table">
                         <thead>
                             <tr>
@@ -75,6 +76,7 @@
                     <hr>
 
                     <h2>ユーザー情報関連</h2>
+                    <p>データベース: usersテーブル</p>
                     <table class="table">
                         <thead>
                             <tr>
@@ -111,6 +113,76 @@
                               <td>200（OK）</td>
                               <td>ユーザー情報（ID, ユーザー名）を取得</td>
                           </tr>
+                        </tbody>
+                    </table>
+
+                    <hr>
+
+                    <h2>タグ関連API</h2>
+                    <p>データベース: tagsテーブル</p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>API名</th>
+                                <th>HTTPメソッド</th>
+                                <th>パス</th>
+                                <th>必要なパラメータ</th>
+                                <th>ステータスコード</th>
+                                <th>説明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>GET tags</td>
+                                <td>GET</td>
+                                <td>/api/tags/</td>
+                                <td>user-token</td>
+                                <td>200（OK）</td>
+                                <td>タグ一覧を取得</td>
+                            </tr>
+                            <tr>
+                                <td>POST tags</td>
+                                <td>POST</td>
+                                <td>/api/tags/</td>
+                                <td>user-token, tag-name</td>
+                                <td>201（Created）</td>
+                                <td>新規タグ登録</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <hr>
+
+                    <h2>記事-タグ関連付けAPI</h2>
+                    <p>データベース: articles_tags中間テーブル</p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>API名</th>
+                                <th>HTTPメソッド</th>
+                                <th>パス</th>
+                                <th>必要なパラメータ</th>
+                                <th>ステータスコード</th>
+                                <th>説明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>GET articles_tags</td>
+                                <td>GET</td>
+                                <td>/api/articles_tags/</td>
+                                <td>user-token, article-id</td>
+                                <td>200（OK）</td>
+                                <td>記事のタグ一覧を取得</td>
+                            </tr>
+                            <tr>
+                                <td>POST articles_tags</td>
+                                <td>POST</td>
+                                <td>/api/articles_tags/</td>
+                                <td>user-token, article-id, [tags]</td>
+                                <td>201（Created）</td>
+                                <td>記事にタグ一覧を新規関連付け</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

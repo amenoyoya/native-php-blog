@@ -145,5 +145,42 @@ function checkUserState($params, &$response){
       ];
       return false;
   }
-  return $user;
+  // ユーザー情報をHTMLエスケープして返す
+  return [
+    'id' => htmlspecialchars($user['id']),
+    'name' => htmlspecialchars($user['name']),
+  ];
+}
+
+
+/**
+ * 記事の存在確認
+ * 
+ * @internal
+ * 
+ * @param PDO $pdo: PDOオブジェクト
+ * @param int $user_id: ユーザーID
+ * @param int $article_id: 記事ID
+ * @param array &$response: エラーが発生した場合にレスポンスデータが渡される
+ * 
+ * @return bool: 記事が存在するか
+ */
+function isArticleExists($pdo, $user_id, $article_id, &$response){
+  $state = $pdo->prepare('select * from articles where user_id=? and id=?');
+  if(!$state->bindValue(1, $user_id, PDO::PARAM_INT)
+      || !$state->bindValue(2, $article_id, PDO::PARAM_INT)
+      || !$state->execute())
+  {
+      $response = [
+          'status' => 500, 'message' => '記事確認中にエラーが発生しました',
+      ];
+      return false;
+  }
+  if(!$state->fetch()){
+      $response = [
+          'status' => 400, 'message' => '無効な記事IDが指定されています',
+      ];
+      return false;
+  }
+  return true;
 }
