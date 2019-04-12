@@ -63,8 +63,8 @@ function registerTag($params, $pdo){
   }
   $name = $params['tag-name'];
 
-  // バリデーションチェック
-  if(!isValid($name, $res)) return $res;
+  // バリデーションチェック（＋タグ名の重複確認）
+  if(!isValid($name, $res, $pdo)) return $res;
   
   // tagsテーブルにデータ挿入
   $state = $pdo->prepare('insert into tags (user_id, name) values (?, ?)');
@@ -76,10 +76,12 @@ function registerTag($params, $pdo){
       'status' => 500, 'message' => 'タグ登録中にエラーが発生しました',
     ];
   }
+  // タグ名をHTMLエスケープして結果を返す
+  $name = htmlspecialchars($name);
   return [
     'status' => 201,
-    'user' => $user,
-    'message' => 'タグ「' . htmlspecialchars($name) . '」が登録されました',
+    'user' => $user, 'tag-name' => $name,
+    'message' => 'タグ「' . $name . '」が登録されました',
   ];
 }
 

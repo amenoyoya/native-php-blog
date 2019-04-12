@@ -15,6 +15,14 @@
                 <div class="col-md-12 mt-3 mb-3">
                     <h1><a href="../">研修用ブログ</a>｜記事編集</h1>
                     <p class="text-muted">筆者: <?php echo $user['name'] ?></p>
+                    <ul class="list-inline">
+                      <li class="list-inline-item">タグ: </li>
+                      <?php foreach($this_tags as $tag): ?>
+                        <li class="list-inline-item">
+                          <span class="badge badge-info"><?php echo $tag['name'] ?></span>
+                        </li>
+                      <?php endforeach ?>
+                    </ul>
                     <form>
                         <input type="hidden" id="user-token" value="<?php echo $_SESSION['user-token'] ?>">
                         <input type="hidden" id="article-id" value="<?php echo $article['id'] ?>">
@@ -26,7 +34,21 @@
                         <div class="form-group">
                             <label for="article-body">本文</label>
                             <textarea class="form-control" id="article-body"><?php echo $article['body'] ?></textarea>
-                            <small class="text-muted">本文は100文字以内で指定してください。</small>
+                            <small class="text-muted">本文は1000文字以内で指定してください。</small>
+                        </div>
+                        <div class="form-group">
+                            <div class="h6">タグ</div>
+                            <?php foreach($tags as $tag): ?>
+                              <label>
+                                <input type="checkbox" class="tags" value="<?php echo $tag['id'] ?>"
+                                  <?php
+                                    /* 現在関連付けられているタグはチェックを付けておく */
+                                    if(false !== array_search($tag['id'], array_column($this_tags, 'id'))) echo 'checked';
+                                  ?>
+                                >
+                                <?php echo $tag['name'] ?>　　
+                              </label>
+                            <?php endforeach ?>
                         </div>
                         <button type="button" class="btn btn-primary" id="update-article">更新</button>
                     </form>

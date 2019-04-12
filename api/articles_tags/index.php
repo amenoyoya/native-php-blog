@@ -1,7 +1,6 @@
 <?php
 
 require_once('../functions.php');
-require_once('./functions.php');
 
 /**
  * 記事に関連付けられたタグ一覧の取得API

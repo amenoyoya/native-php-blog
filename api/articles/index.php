@@ -83,9 +83,20 @@ function createArticle($params, $pdo){
           'status' => 500, 'message' => '記事登録中にエラーが発生しました',
       ];
   }
+
+  // 登録された記事のID（一番新しいID）を取得
+  $state = $pdo->prepare('select max(id) as id from articles where user_id=?;');
+  if(!$state->bindValue(1, $user['id'], PDO::PARAM_INT)
+    || !$state->execute() || !($row = $state->fetch()))
+  {
+      return [
+          'status' => 500, 'message' => '記事確認中にエラーが発生しました',
+      ];
+  }
+
   return [
       'status' => 201,
-      'user' => $user,
+      'user' => $user, 'article-id' => htmlspecialchars($row['id']),
       'message' => 'ブログ記事「' . htmlspecialchars($title) . '」が登録されました',
   ];
 }

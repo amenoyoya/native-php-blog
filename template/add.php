@@ -27,7 +27,16 @@
                             <div class="form-group">
                                 <label for="article-body">本文</label>
                                 <textarea class="form-control" id="article-body"></textarea>
-                                <small class="text-muted">本文は100文字以内で指定してください。</small>
+                                <small class="text-muted">本文は1000文字以内で指定してください。</small>
+                            </div>
+                            <div class="form-group">
+                              <div class="h6">タグ</div>
+                              <?php foreach($tags as $tag): ?>
+                                <label>
+                                  <input type="checkbox" class="tags" value="<?php echo $tag['id'] ?>">
+                                  <?php echo $tag['name'] ?>　　
+                                </label>
+                              <?php endforeach ?>
                             </div>
                             <button type="button" class="btn btn-primary" id="add-article">投稿</button>
                         </form>

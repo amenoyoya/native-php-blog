@@ -18,6 +18,7 @@
                         <?php echo $error_message ?>
                     <?php else: /*  記事が取得できた場合、一覧表示 */ ?>
                         <p class="text-muted">筆者：<?php echo $user['name'] ?></p>
+                        <a href="./tags/add/">タグ登録</a>
                         <div class="card-deck">
                             <?php foreach($articles as $article): ?>
                                 <div class="card">
