@@ -6,7 +6,6 @@ $('#add-article').click(function(){
     $('.tags:checked').each(function(){
       tags.push($(this).val());
     });
-    console.log(tags);
     // 結果欄をクリアしておく
     $('#result').html('');
     // データベース処理実行
